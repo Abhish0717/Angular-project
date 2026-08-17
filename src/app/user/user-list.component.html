@@ -1,0 +1,50 @@
+<div align="center">
+    <h2>User List</h2>
+
+    <h2>{{form.message}}</h2>
+
+    <form>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="firstName" [(ngModel)]="form.searchParam.firstName"
+                        placeholder="search by firstName"></td>
+                <th>Last Name</th>
+                <td><input type="text" name="lastName" [(ngModel)]="form.searchParam.lastName"
+                        placeholder="search by lastName"></td>
+                <td>
+                    <button (click)="search()">search</button>
+                </td>
+            </tr>
+        </table>
+
+        <table width="100%" border="1">
+            <tr style="background-color: skyblue;">
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Role</th>
+                <th>Login</th>
+                <th>DOB</th>
+            </tr>
+
+            <tr align="center" *ngFor="let user of form.list">
+                <td>{{user.id}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.roleName}}</td>
+                <td>{{user.login}}</td>
+                <td>{{user.dob | date: 'yyyy-MM-dd'}}</td>
+
+            </tr>
+
+        </table>
+        <table width="100%">
+            <tr>
+                <td><button [disabled]="form.pageNo == 0" (click)="previous()">previous</button></td>
+                <td align="right"><button [disabled]="form.list.length < 5" (click)="next()">next</button></td>
+            </tr>
+        </table>
+    </form>
+
+</div>

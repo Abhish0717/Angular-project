@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpServiceService } from '../http-service.service';
 
 @Component({
@@ -8,10 +8,16 @@ import { HttpServiceService } from '../http-service.service';
 })
 export class LoginComponent {
 
-  constructor(private router: Router, private httpService: HttpServiceService) { }
-
   endpoint = 'http://localhost:8080/Auth/login';
 
+  constructor(private router: Router, private httpService: HttpServiceService, private activatedRoute: ActivatedRoute) {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['message']) {
+        this.form.successMsg = params['message'];
+      }
+    });
+  }
   form: any = {
     data: {},
     errorMsg: '',
@@ -19,33 +25,43 @@ export class LoginComponent {
   }
 
   signIn() {
-    console.log(this.form.data.login);
-    console.log(this.form.data.password);
+    // console.log(this.form.data.login);
+    // console.log(this.form.data.password);
 
-    let _self = this;
-    this.httpService.post(this.endpoint, this.form.data, function (response: any) {
+    this.form.errorMsg = ''
+    this.form.successMsg = ''
+    this.form.inputerror = {}
+
+    this.httpService.post(this.endpoint, this.form.data, (response: any) => {
+
       console.log("response: ", response);
 
       if (response.success == false && response.result.inputerror) {
-        _self.form.inputerror = response.result.inputerror;
+        this.form.inputerror = response.result.inputerror;
+        return;
       }
 
       if (response.success == false && response.result.message) {
-        _self.form.errorMsg = response.result.message;
+        this.form.errorMsg = response.result.message;
+        return;
       }
 
       if (response.success == true) {
-        _self.router.navigateByUrl('/welcome')
+        localStorage.setItem('firstName', response.result.data.firstName);
+        localStorage.setItem('roleName', response.result.data.roleName);
+        localStorage.setItem('id', response.result.data.id);
+        this.router.navigateByUrl('/welcome')
       } else {
-        _self.form.errorMsg = 'Invalid login or password';
+        this.form.errorMsg = 'Invalid login or password';
       }
 
-    })
-    // if (this.form.login != null && this.form.password != null) {
+    });
+    // if (this.form.login == admin && this.form.password == admin) {
 
     //   this.router.navigateByUrl('/welcome');
 
     // }
+
   }
 
   signUp() {
