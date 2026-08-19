@@ -37,7 +37,4 @@ export class UserComponent {
       }
     });
   }
-  reset(){
-    this.router.navigateByUrl('/user');
-  }
 }

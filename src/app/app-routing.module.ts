@@ -32,11 +32,19 @@ const routes: Routes = [
     component: RoleComponent
   },
   {
+    path: 'role/:id',
+    component: RoleComponent
+  },
+  {
     path: 'roleList',
     component: RoleListComponent
   },
   {
     path: 'user',
+    component: UserComponent
+  },
+  {
+    path: 'user/:id',
     component: UserComponent
   },
   {

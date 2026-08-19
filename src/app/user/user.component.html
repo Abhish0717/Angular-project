@@ -37,14 +37,17 @@
             </tr>
             <tr>
                 <th>Role Id:</th>
-                <td><input type="text" name="roleId" [(ngModel)]="form.data.roleId" placeholder="Enter your Role Id">
-                </td>
+                <td>
+                <select name="roleId" [(ngModel)]="form.data.roleId">
+                    <option value="undefined">------------Select------------</option>
+                    <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+                </select>
+            </td>
                 <td style="color: red;">{{form.inputerror.roleId}}</td>
             </tr>
             <tr>
                 <th></th>
-                <td><input type="submit" value="save"> &nbsp;
-                    <button (click)="reset()">reset</button>
+                <td><input type="submit" value="save">
                 </td>
             </tr>
         </table>

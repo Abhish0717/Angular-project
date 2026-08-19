@@ -44,4 +44,10 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+  edit(page: any) {
+    console.log("page ==> ", page);
+    this.router.navigateByUrl(page);
+  }
+
 }

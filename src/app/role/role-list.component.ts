@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../http-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-role-list',
@@ -7,7 +8,7 @@ import { HttpServiceService } from '../http-service.service';
 })
 export class RoleListComponent implements OnInit {
 
-  constructor(private httpService: HttpServiceService) { }
+  constructor(private httpService: HttpServiceService, private router : Router) { }
 
   ngOnInit(): void {
     this.search();
@@ -41,5 +42,9 @@ export class RoleListComponent implements OnInit {
         this.form.errorMessage = response.result.message;
       }
     })
+  }
+  edit(page: any) {
+    console.log("page ==> ", page);
+    this.router.navigateByUrl(page);
   }
 }

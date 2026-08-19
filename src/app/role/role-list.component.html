@@ -19,12 +19,14 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Edit</th>
             </tr>
 
             <tr align="center" *ngFor="let role of form.list">
                 <td>{{role.id}}</td>
                 <td>{{role.name}}</td>
                 <td>{{role.description}}</td>
+                <td><a (click)="edit('/role/' + role.id)"></a></td>
             </tr>
 
         </table>
