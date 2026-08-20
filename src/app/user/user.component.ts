@@ -14,7 +14,8 @@ export class UserComponent {
     data: {},
     errorMsg: '',
     successMsg: '',
-    inputerror: {}
+    inputerror: {},
+    roleList: []
   }
 
   constructor(private httpService: HttpServiceService, private router: Router) { }

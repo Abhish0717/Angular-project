@@ -1,6 +1,7 @@
 <div align="center">
 
-    <h1>Add User</h1>
+    <h1 *ngIf="form.data.id">Update User</h1>
+    <h1 *ngIf="!form.data.id">Add User</h1>
     <h3 style="color: red">{{form.errorMsg}}</h3>
     <h3 style="color: green">{{form.successMsg}}</h3>
     <form (submit)="save()">
@@ -38,11 +39,11 @@
             <tr>
                 <th>Role Id:</th>
                 <td>
-                <select name="roleId" [(ngModel)]="form.data.roleId">
-                    <option value="undefined">------------Select------------</option>
-                    <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
-                </select>
-            </td>
+                    <select name="roleId" [(ngModel)]="form.data.roleId">
+                        <option value="undefined">------------Select------------</option>
+                        <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+                    </select>
+                </td>
                 <td style="color: red;">{{form.inputerror.roleId}}</td>
             </tr>
             <tr>
